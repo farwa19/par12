@@ -1,44 +1,75 @@
-
 ### Get all blogs
 GET http://localhost:3001/api/blogs
 
-### Get a blog by ID
-GET http://localhost:3001/api/blogs/1
+### Register the owner
+# @name registerOwner
+POST http://localhost:3001/api/users
+Content-Type: application/json
 
-### Create a new blog
+{
+  "name": "Blowner",
+  "username": "test@example.com",
+  "password": "test-password-123"
+}
+
+### Log in as the owner
+# @name loginOwner
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "test@example.com",
+  "password": "test-password-123"
+}
+
+### Register another user
+# @name registerOtherUser
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "name": "Anothr User",
+  "username": "other.hh@example.com",
+  "password": "test-password-123"
+}
+
+### Log in as the other user
+# @name loginOtherUser
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "name": "Anothr User",
+  "username": "other.hh@example.com",
+  "password": "test-password-123"
+}
+
+
+### Create a blog as the owner
+# @name createOwnedBlog
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im90aGVyLmhoQGV4YW1wbGUuY29tIiwiaWQiOjQxLCJpYXQiOjE3OTQ4MjYxMTQsImV4cCI6MTc5NDgyOTcxNH0.ouuHE4z1k9CRmi_j_npBCoZy8PQw4i7c6qanEQliZeQ
 
 {
-  "author": "Fawa",
-  "url": "https://test.com/",
-  "title": "test",
-  "likes": 5
+  "author": "Blog Ownr",
+  "url": "https://exmple.com/owner-blog",
+  "title": "Ownership test blog",
+  "likes": 0
 }
 
-### Create a blog without likes (should default to 0)
-POST http://localhost:3001/api/blogs
-Content-Type: application/json
+### Delete without a token (expect 401 Unauthorized)
+DELETE http://localhost:3001/api/blogs/13
 
-{
-  "author": "musab",
-  "url": "https://react.dev/",
-  "title": "Learning React"
-}
+### Delete as another user (expect 403 Forbidden)
+DELETE http://localhost:3001/api/blogs/13
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAZXhhbXBsZS5jb20iLCJpZCI6NDAsImlhdCI6MTc5NDgyNTYzOCwiZXhwIjoxNzk0ODI5MjM4fQ.DRNkgXIC7B98A2PGBnDmZel9p18DFAmZEIwbULpNdso
 
-### Update a blog
-PUT http://localhost:3001/api/blogs/1
-Content-Type: application/json
+### Delete as the owner (expect 204 No Content)
+DELETE http://localhost:3001/api/blogs/{{createOwnedBlog.response.body.id}}
+Authorization: Bearer {{loginOwner.response.body.token}}
 
-{
-  "author": "Farwa",
-  "url": "https://example.com/updated",
-  "title": "Updated Blog Title",
-  "likes": 15
-}
+### Confirm the blog was deleted (expect 404 Not Found)
+GET http://localhost:3001/api/blogs/{{createOwnedBlog.response.body.id}}
 
-### Delete a blog
-DELETE http://localhost:3001/api/blogs/5
 
-### Get the deleted blog (should return 404)
-GET http://localhost:3001/api/blogs/2
