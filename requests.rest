@@ -1,0 +1,44 @@
+
+### Get all blogs
+GET http://localhost:3001/api/blogs
+
+### Get a blog by ID
+GET http://localhost:3001/api/blogs/1
+
+### Create a new blog
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "author": "Fawa",
+  "url": "https://test.com/",
+  "title": "test",
+  "likes": 5
+}
+
+### Create a blog without likes (should default to 0)
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "author": "musab",
+  "url": "https://react.dev/",
+  "title": "Learning React"
+}
+
+### Update a blog
+PUT http://localhost:3001/api/blogs/1
+Content-Type: application/json
+
+{
+  "author": "Farwa",
+  "url": "https://example.com/updated",
+  "title": "Updated Blog Title",
+  "likes": 15
+}
+
+### Delete a blog
+DELETE http://localhost:3001/api/blogs/5
+
+### Get the deleted blog (should return 404)
+GET http://localhost:3001/api/blogs/2
