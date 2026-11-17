@@ -22,14 +22,6 @@ module.exports = {
         type: DataTypes.TEXT,
         allowNull: true
       },
-      admin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
-      },
-      disabled: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
-      },
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -76,16 +68,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      created_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-      },
-      updated_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-      }
     })
   },
 
