@@ -38,7 +38,9 @@ router.post('/', authenticate, async (req, res) => {
       author: req.body.author,
       url: req.body.url,
       title: req.body.title,
-      likes: req.body.likes
+      likes: req.body.likes,
+      userId: req.user.id,
+      year: req.body.year
     })
     res.status(201).json(blog)
   } catch (error) {

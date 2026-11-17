@@ -18,7 +18,7 @@ POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-  "username": "test@example.com",
+   "username": "test@example.com",
   "password": "test-password-123"
 }
 
@@ -73,3 +73,42 @@ Authorization: Bearer {{loginOwner.response.body.token}}
 GET http://localhost:3001/api/blogs/{{createOwnedBlog.response.body.id}}
 
 
+### Confirm the
+
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im90aGVyLmhoQGV4YW1wbGUuY29tIiwiaWQiOjEsImlhdCI6MTc5NDg1MTgxOCwiZXhwIjoxNzk0ODU1NDE4fQ.2U8V24nYGwutT3dcQGtow5Fdr2caUPNF7D6RjcwA8X8
+
+{
+  "author": "Testhor",
+  "title": "Tesngyear",
+  "url": "https://exple.com",
+  "likes": 5,
+  "year": 1997,
+  "user_id": 1
+}
+
+### Add a blog to a user's reading list
+POST http://localhost:3001/api/readinglists
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im90aGVyLmhoQGV4YW1wbGUuY29tIiwiaWQiOjEsImlhdCI6MTc5NDg1NTkwNywiZXhwIjoxNzk0ODU5NTA3fQ.ixh94JvNQLkbJMxrXj4MjyciUQcuhCKL1ph5EjwUrJk
+
+{
+  "userId": 1,
+  "blogId": 4
+}
+
+### Get a user's reading list
+
+PUT  http://localhost:3001/api/readinglists/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im90aGVyLmhoQGV4YW1wbGUuY29tIiwiaWQiOjEsImlhdCI6MTc5NDg5ODA3OCwiZXhwIjoxNzk0OTAxNjc4fQ.xGk_MY425vVHL20ypVQu7XSraoUoIjLBFssG0c3SCKU
+
+{
+  "read": true
+}
+
+### logout
+DELETE http://localhost:3001/api/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAZXhhbXBsZS5jb20iLCJpZCI6MywiaWF0IjoxNzk0OTAwMzEyLCJleHAiOjE3OTQ5MDM5MTJ9.-gGcu9pwFtNny-v2N4KYG1X2OAfSVZtSY5Ppn-s6Nkg

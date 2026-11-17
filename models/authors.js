@@ -19,6 +19,10 @@ Author.init({
   likes: {
     type: DataTypes.INTEGER,
     defaultValue: 0
+  },
+  disabled: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   }
 }, {
   sequelize,
